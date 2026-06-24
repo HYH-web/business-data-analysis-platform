@@ -19,7 +19,8 @@ describe("canvasBlocks", () => {
   it("appends a follow-up insight block after AI response", () => {
     const blocks = createInitialBlocks();
     const updated = appendFollowUpBlock(blocks, "analysis-1");
-    expect(updated.at(-1)?.id).toBe("analysis-1");
-    expect(updated.at(-1)?.type).toBe("insight");
+    const lastBlock = updated[updated.length - 1];
+    expect(lastBlock?.id).toBe("analysis-1");
+    expect(lastBlock?.type).toBe("insight");
   });
 });
