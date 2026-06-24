@@ -268,6 +268,29 @@ button:not(:disabled) {
   color: var(--alert-red);
 }
 
+.health-options {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.health-option {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: color-mix(in srgb, var(--panel) 82%, var(--canvas-gray));
+}
+
+.health-option strong {
+  color: var(--byte-blue);
+}
+
+.health-option span {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 .chart-placeholder {
   border-style: dashed;
 }

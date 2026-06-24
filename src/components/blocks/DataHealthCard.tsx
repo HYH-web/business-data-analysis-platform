@@ -1,4 +1,5 @@
 import type { CleaningChoice, DataHealthSummary } from "../../types/domain";
+import { applyCleaningChoice } from "../../lib/dataHealth";
 
 interface DataHealthCardProps {
   summary: DataHealthSummary;
@@ -7,6 +8,9 @@ interface DataHealthCardProps {
 }
 
 export default function DataHealthCard({ summary, selected, onChoice }: DataHealthCardProps) {
+  const optionA = applyCleaningChoice("mean-fill");
+  const optionB = applyCleaningChoice("drop-rows");
+
   return (
     <section className="block-card" aria-labelledby="data-health-title">
       <div className="block-heading">
@@ -38,8 +42,15 @@ export default function DataHealthCard({ summary, selected, onChoice }: DataHeal
         </div>
       </div>
 
-      <div className="health-alert">
-        <strong>推荐方案</strong> 方案 A 保留整张表的口径，适合后续复盘。
+      <div className="health-options">
+        <div className="health-option">
+          <strong>{optionA.label}</strong>
+          <span>{optionA.copy}</span>
+        </div>
+        <div className="health-option">
+          <strong>{optionB.label}</strong>
+          <span>{optionB.copy}</span>
+        </div>
       </div>
 
       <div className="health-actions">

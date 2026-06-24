@@ -25,7 +25,6 @@ export default function CanvasBoard({
   cleaningSelected,
   onCleaningChoice,
   onSelectChart,
-  onDeleteChart,
 }: CanvasBoardProps) {
   return (
     <main className="canvas-board">
@@ -66,7 +65,6 @@ export default function CanvasBoard({
                 aria-label={`${block.title} ${chartLabels[block.chartKind]}`}
                 onFocus={() => onSelectChart(block.chartKind!)}
                 onMouseEnter={() => onSelectChart(block.chartKind!)}
-                onClick={() => onDeleteChart(block.id)}
               >
                 <div className="block-heading">
                   <div>
