@@ -30,4 +30,12 @@ describe("App", () => {
 
     expect(screen.getByRole("button", { name: "发送追问" })).toBeInTheDocument();
   });
+
+  it("opens report preview and shows mock export actions", async () => {
+    render(<App />);
+    await userEvent.click(screen.getByRole("button", { name: "沉淀报告" }));
+    expect(screen.getByText("复盘报告预览")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "导出 PDF" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "生成飞书文档" })).toBeInTheDocument();
+  });
 });

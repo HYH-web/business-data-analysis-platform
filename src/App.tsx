@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import AIContextBubble from "./components/AIContextBubble";
 import AppShell from "./components/AppShell";
 import CanvasBoard from "./components/CanvasBoard";
+import ReportPreview from "./components/ReportPreview";
 import { mockLiveRows } from "./data/mockLiveData";
 import { buildDataHealthSummary } from "./lib/dataHealth";
 import { appendFollowUpBlock, createInitialBlocks, markChartDeleted } from "./lib/canvasBlocks";
@@ -21,6 +22,7 @@ export default function App() {
   const healthSummary = useMemo(() => buildDataHealthSummary(mockLiveRows), []);
   const [cleaningChoice, setCleaningChoice] = useState<CleaningChoice | null>(null);
   const [selectedChart, setSelectedChart] = useState<SelectedChart | null>(null);
+  const [reportOpen, setReportOpen] = useState(false);
   const [blocks, setBlocks] = useState(initialBlocks);
 
   const handleClean = () => {
@@ -28,11 +30,11 @@ export default function App() {
   };
 
   const handleReport = () => {
-    return;
+    setReportOpen(true);
   };
 
   const handleExport = () => {
-    return;
+    setReportOpen(true);
   };
 
   const handleFollowUp = () => {
@@ -66,6 +68,7 @@ export default function App() {
         visible={selectedChart !== null && cleaningChoice !== null}
         onSubmit={handleFollowUp}
       />
+      <ReportPreview open={reportOpen} onClose={() => setReportOpen(false)} />
     </AppShell>
   );
 }
