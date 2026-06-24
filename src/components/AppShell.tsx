@@ -8,7 +8,7 @@ interface AppShellProps {
 }
 
 export default function AppShell({ children, onClean, onReport, onExport }: AppShellProps) {
-  const [projectName, setProjectName] = useState("11.11女装大促复盘_v1");
+  const [projectName, setProjectName] = useState("业务数据智能分析平台");
 
   const handleProjectNameInput = (event: FormEvent<HTMLHeadingElement>) => {
     setProjectName(event.currentTarget.textContent ?? "");
