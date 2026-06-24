@@ -37,7 +37,7 @@ describe("CanvasBoard", () => {
     expect(onCleaningChoice).toHaveBeenCalledWith("mean-fill");
   });
 
-  it("selects chart placeholders with mouse and keyboard without deleting them", async () => {
+  it("selects chart cards and deletes them from the action button", async () => {
     const user = userEvent.setup();
     const onSelectChart = vi.fn();
     const onDeleteChart = vi.fn();
@@ -53,18 +53,20 @@ describe("CanvasBoard", () => {
       />,
     );
 
-    const placeholder = screen.getByLabelText("转化漏斗 转化漏斗");
+    const card = screen.getByLabelText("转化漏斗 转化漏斗");
 
-    await user.click(placeholder);
-    placeholder.blur();
+    await user.hover(card);
+    card.blur();
     onSelectChart.mockClear();
 
-    placeholder.focus();
-    await user.keyboard("{Enter}");
-    await user.keyboard(" ");
+    card.focus();
 
     expect(onSelectChart).toHaveBeenCalledWith("funnel");
-    expect(onSelectChart).toHaveBeenCalledTimes(3);
-    expect(onDeleteChart).not.toHaveBeenCalled();
+    expect(screen.getAllByRole("button", { name: "切换图表类型" })).toHaveLength(4);
+    expect(screen.getAllByRole("button", { name: "查看原始数据" })).toHaveLength(4);
+
+    await user.click(screen.getAllByRole("button", { name: "删除该图表" })[0]);
+
+    expect(onDeleteChart).toHaveBeenCalledWith("chart-funnel");
   });
 });

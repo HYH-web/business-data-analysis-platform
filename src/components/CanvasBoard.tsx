@@ -1,6 +1,6 @@
-import type { KeyboardEvent } from "react";
 import type { CanvasBlock, ChartKind, CleaningChoice, DataHealthSummary } from "../types/domain";
 import AlertCard from "./blocks/AlertCard";
+import ChartCard from "./blocks/ChartCard";
 import DataHealthCard from "./blocks/DataHealthCard";
 import InsightBlock from "./blocks/InsightBlock";
 
@@ -13,23 +13,13 @@ interface CanvasBoardProps {
   onDeleteChart: (id: string) => void;
 }
 
-const chartLabels: Record<ChartKind, string> = {
-  funnel: "转化漏斗",
-  cohort: "同期群",
-  trend: "趋势图",
-  pareto: "帕累托",
-};
-
-function isActivationKey(event: KeyboardEvent<HTMLElement>) {
-  return event.key === "Enter" || event.key === " ";
-}
-
 export default function CanvasBoard({
   blocks,
   healthSummary,
   cleaningSelected,
   onCleaningChoice,
   onSelectChart,
+  onDeleteChart,
 }: CanvasBoardProps) {
   return (
     <main className="canvas-board">
@@ -61,38 +51,15 @@ export default function CanvasBoard({
           }
 
           if (block.type === "chart" && block.chartKind) {
-            const chartKind = block.chartKind;
-            const selectChart = () => onSelectChart(chartKind);
-
             return (
-              <section
+              <ChartCard
                 key={block.id}
-                className="block-card chart-placeholder"
-                tabIndex={0}
-                role="button"
-                aria-label={`${block.title} ${chartLabels[chartKind]}`}
-                onFocus={selectChart}
-                onMouseEnter={selectChart}
-                onClick={selectChart}
-                onKeyDown={(event) => {
-                  if (isActivationKey(event)) {
-                    event.preventDefault();
-                    selectChart();
-                  }
-                }}
-              >
-                <div className="block-heading">
-                  <div>
-                    <h3>{block.title}</h3>
-                    <p className="block-body">
-                      图表占位 · {chartLabels[chartKind]} · 后续接入 ECharts。
-                    </p>
-                  </div>
-                  <span className="block-kind">图表</span>
-                </div>
-                <span className="chart-pill">{chartLabels[chartKind]}</span>
-                <p className="chart-meta">悬停或聚焦时会进入图表编辑态。</p>
-              </section>
+                id={block.id}
+                title={block.title}
+                kind={block.chartKind}
+                onSelect={onSelectChart}
+                onDelete={onDeleteChart}
+              />
             );
           }
 
