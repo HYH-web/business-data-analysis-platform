@@ -1,19 +1,31 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode, type FormEvent } from "react";
 
 interface AppShellProps {
   children: ReactNode;
   onClean: () => void;
   onReport: () => void;
+  onExport: () => void;
 }
 
-export default function AppShell({ children, onClean, onReport }: AppShellProps) {
+export default function AppShell({ children, onClean, onReport, onExport }: AppShellProps) {
+  const [projectName, setProjectName] = useState("11.11女装大促复盘_v1");
+
+  const handleProjectNameInput = (event: FormEvent<HTMLHeadingElement>) => {
+    setProjectName(event.currentTarget.textContent ?? "");
+  };
+
   return (
     <div className="app-shell">
       <header className="app-topbar">
         <div className="app-brand">
           <div className="project-meta">
-            <h1 className="project-title" contentEditable suppressContentEditableWarning>
-              11.11女装大促复盘_v1
+            <h1
+              className="project-title"
+              contentEditable
+              suppressContentEditableWarning
+              onInput={handleProjectNameInput}
+            >
+              {projectName}
             </h1>
             <p className="project-status">已自动保存于 14:30</p>
           </div>
@@ -25,7 +37,7 @@ export default function AppShell({ children, onClean, onReport }: AppShellProps)
           <button type="button" className="button-secondary" onClick={onReport}>
             沉淀报告
           </button>
-          <button type="button" className="button-primary" onClick={onReport}>
+          <button type="button" className="button-primary" onClick={onExport}>
             导出
           </button>
         </div>

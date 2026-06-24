@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from "react";
 import type { CanvasBlock, ChartKind, CleaningChoice, DataHealthSummary } from "../types/domain";
 import AlertCard from "./blocks/AlertCard";
 import DataHealthCard from "./blocks/DataHealthCard";
@@ -18,6 +19,10 @@ const chartLabels: Record<ChartKind, string> = {
   trend: "趋势图",
   pareto: "帕累托",
 };
+
+function isActivationKey(event: KeyboardEvent<HTMLElement>) {
+  return event.key === "Enter" || event.key === " ";
+}
 
 export default function CanvasBoard({
   blocks,
@@ -56,26 +61,36 @@ export default function CanvasBoard({
           }
 
           if (block.type === "chart" && block.chartKind) {
+            const chartKind = block.chartKind;
+            const selectChart = () => onSelectChart(chartKind);
+
             return (
               <section
                 key={block.id}
                 className="block-card chart-placeholder"
                 tabIndex={0}
                 role="button"
-                aria-label={`${block.title} ${chartLabels[block.chartKind]}`}
-                onFocus={() => onSelectChart(block.chartKind!)}
-                onMouseEnter={() => onSelectChart(block.chartKind!)}
+                aria-label={`${block.title} ${chartLabels[chartKind]}`}
+                onFocus={selectChart}
+                onMouseEnter={selectChart}
+                onClick={selectChart}
+                onKeyDown={(event) => {
+                  if (isActivationKey(event)) {
+                    event.preventDefault();
+                    selectChart();
+                  }
+                }}
               >
                 <div className="block-heading">
                   <div>
                     <h3>{block.title}</h3>
                     <p className="block-body">
-                      图表占位 · {chartLabels[block.chartKind]} · 后续接入 ECharts。
+                      图表占位 · {chartLabels[chartKind]} · 后续接入 ECharts。
                     </p>
                   </div>
                   <span className="block-kind">图表</span>
                 </div>
-                <span className="chart-pill">{chartLabels[block.chartKind]}</span>
+                <span className="chart-pill">{chartLabels[chartKind]}</span>
                 <p className="chart-meta">悬停或聚焦时会进入图表编辑态。</p>
               </section>
             );

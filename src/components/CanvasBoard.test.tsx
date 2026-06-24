@@ -37,7 +37,7 @@ describe("CanvasBoard", () => {
     expect(onCleaningChoice).toHaveBeenCalledWith("mean-fill");
   });
 
-  it("selects chart placeholders on focus without deleting them on click", async () => {
+  it("selects chart placeholders with mouse and keyboard without deleting them", async () => {
     const user = userEvent.setup();
     const onSelectChart = vi.fn();
     const onDeleteChart = vi.fn();
@@ -53,9 +53,18 @@ describe("CanvasBoard", () => {
       />,
     );
 
-    await user.click(screen.getByLabelText("转化漏斗 转化漏斗"));
+    const placeholder = screen.getByLabelText("转化漏斗 转化漏斗");
+
+    await user.click(placeholder);
+    placeholder.blur();
+    onSelectChart.mockClear();
+
+    placeholder.focus();
+    await user.keyboard("{Enter}");
+    await user.keyboard(" ");
 
     expect(onSelectChart).toHaveBeenCalledWith("funnel");
+    expect(onSelectChart).toHaveBeenCalledTimes(3);
     expect(onDeleteChart).not.toHaveBeenCalled();
   });
 });

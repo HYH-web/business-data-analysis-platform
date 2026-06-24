@@ -4,12 +4,13 @@ import CanvasBoard from "./components/CanvasBoard";
 import { mockLiveRows } from "./data/mockLiveData";
 import { buildDataHealthSummary } from "./lib/dataHealth";
 import { createInitialBlocks, markChartDeleted } from "./lib/canvasBlocks";
-import type { CleaningChoice } from "./types/domain";
+import type { ChartKind, CleaningChoice } from "./types/domain";
 
 export default function App() {
   const initialBlocks = useMemo(() => createInitialBlocks(), []);
   const healthSummary = useMemo(() => buildDataHealthSummary(mockLiveRows), []);
   const [cleaningChoice, setCleaningChoice] = useState<CleaningChoice | null>(null);
+  const [, setSelectedChart] = useState<ChartKind | null>(null);
   const [blocks, setBlocks] = useState(initialBlocks);
 
   const handleClean = () => {
@@ -20,16 +21,18 @@ export default function App() {
     return;
   };
 
+  const handleExport = () => {
+    return;
+  };
+
   return (
-    <AppShell onClean={handleClean} onReport={handleReport}>
+    <AppShell onClean={handleClean} onReport={handleReport} onExport={handleExport}>
       <CanvasBoard
         blocks={blocks}
         healthSummary={healthSummary}
         cleaningSelected={cleaningChoice !== null}
         onCleaningChoice={setCleaningChoice}
-        onSelectChart={() => {
-          return;
-        }}
+        onSelectChart={setSelectedChart}
         onDeleteChart={(id) => {
           setBlocks((current) => markChartDeleted(current, id));
         }}
