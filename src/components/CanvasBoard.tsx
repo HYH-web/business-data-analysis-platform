@@ -3,6 +3,7 @@ import AlertCard from "./blocks/AlertCard";
 import ChartCard from "./blocks/ChartCard";
 import DataHealthCard from "./blocks/DataHealthCard";
 import InsightBlock from "./blocks/InsightBlock";
+import SlashCommand from "./SlashCommand";
 
 interface CanvasBoardProps {
   blocks: CanvasBlock[];
@@ -32,6 +33,8 @@ export default function CanvasBoard({
           <span className="canvas-chip">待生成图表</span>
         </div>
       </section>
+
+      <SlashCommand onCommand={() => undefined} />
 
       <section className="block-grid" aria-label="canvas blocks">
         {blocks.map((block) => {

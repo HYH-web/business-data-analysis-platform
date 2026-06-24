@@ -188,6 +188,98 @@ button:not(:disabled) {
   gap: 0.9rem;
 }
 
+.slash-command {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.slash-command button {
+  min-height: 2rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+  border-radius: var(--radius-s);
+  background: color-mix(in srgb, var(--canvas-gray) 52%, var(--panel));
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.2;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.slash-command button:hover {
+  border-color: color-mix(in srgb, var(--byte-blue) 38%, var(--line));
+  background: color-mix(in srgb, var(--byte-blue) 8%, var(--panel));
+  color: var(--byte-blue);
+  transform: translateY(-1px);
+}
+
+.ai-bubble {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: min(28rem, calc(100vw - 2.5rem));
+  padding: 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--byte-blue) 28%, var(--line));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--byte-blue));
+  box-shadow: 0 18px 45px rgba(23, 32, 51, 0.14);
+}
+
+.ai-bubble-copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.ai-bubble-copy strong {
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.ai-bubble-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.ai-bubble-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 0.35rem;
+  min-height: 2.35rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-m);
+  background: var(--ink);
+  color: var(--panel);
+  font-size: 0.86rem;
+  transition:
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.ai-bubble-button:hover {
+  background: var(--byte-blue);
+  transform: translateY(-1px);
+}
+
 .block-card {
   display: flex;
   flex-direction: column;
@@ -362,6 +454,27 @@ button:not(:disabled) {
 
   .topbar-actions > button {
     flex: 1 1 0;
+  }
+
+  .slash-command {
+    align-items: stretch;
+  }
+
+  .slash-command button {
+    flex: 1 1 8.5rem;
+  }
+
+  .ai-bubble {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    left: 0.9rem;
+    max-width: none;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .ai-bubble-button {
+    width: 100%;
   }
 }
 

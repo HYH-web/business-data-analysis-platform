@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 
 describe("App", () => {
@@ -9,5 +10,13 @@ describe("App", () => {
     expect(screen.getByRole("button", { name: "一键清洗" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "沉淀报告" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "导出" })).toBeInTheDocument();
+  });
+
+  it("appends an AI follow-up block from the contextual bubble", async () => {
+    render(<App />);
+    await userEvent.click(screen.getByRole("button", { name: "选择方案 A" }));
+    await userEvent.click(screen.getByRole("region", { name: "转化漏斗 转化漏斗" }));
+    await userEvent.click(screen.getByRole("button", { name: "发送追问" }));
+    expect(screen.getByText("AI BP 追问结论")).toBeInTheDocument();
   });
 });
