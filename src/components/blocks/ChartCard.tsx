@@ -5,11 +5,13 @@ import { buildChartOption } from "../../charts/chartOptions";
 import { mockLiveRows } from "../../data/mockLiveData";
 import type { ChartKind } from "../../types/domain";
 
+export type ChartSelectSource = "focus" | "action";
+
 interface ChartCardProps {
   id: string;
   title: string;
   kind: ChartKind;
-  onSelect: (kind: ChartKind) => void;
+  onSelect: (kind: ChartKind, source?: ChartSelectSource) => void;
   onDelete: (id: string) => void;
 }
 
@@ -28,18 +30,18 @@ const chartConclusions: Record<ChartKind, string> = {
 };
 
 export default function ChartCard({ id, title, kind, onSelect, onDelete }: ChartCardProps) {
-  const handleSelect = () => onSelect(kind);
+  const handleSelect = (source?: ChartSelectSource) => onSelect(kind, source);
   const handleCardFocus = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget === event.target) {
-      handleSelect();
+      handleSelect("focus");
     }
   };
-  const handleCardMouseEnter = (event: MouseEvent<HTMLElement>) => {
+  const handleCardClick = (event: MouseEvent<HTMLElement>) => {
     if (event.target instanceof Element && event.target.closest(".chart-actions")) {
       return;
     }
 
-    handleSelect();
+    handleSelect("action");
   };
 
   return (
@@ -48,7 +50,7 @@ export default function ChartCard({ id, title, kind, onSelect, onDelete }: Chart
       aria-label={`${title} ${chartLabels[kind]}`}
       tabIndex={0}
       onFocus={handleCardFocus}
-      onMouseEnter={handleCardMouseEnter}
+      onClick={handleCardClick}
     >
       <div className="chart-card-header">
         <div>
@@ -56,10 +58,10 @@ export default function ChartCard({ id, title, kind, onSelect, onDelete }: Chart
           <h3>{title}</h3>
         </div>
         <div className="chart-actions" aria-label="图表操作">
-          <button type="button" aria-label="切换图表类型" onClick={handleSelect}>
+          <button type="button" aria-label="切换图表类型" onClick={() => handleSelect("action")}>
             <BarChart3 size={16} aria-hidden="true" />
           </button>
-          <button type="button" aria-label="查看原始数据" onClick={handleSelect}>
+          <button type="button" aria-label="查看原始数据" onClick={() => handleSelect("action")}>
             <Table2 size={16} aria-hidden="true" />
           </button>
           <button type="button" aria-label="删除该图表" onClick={() => onDelete(id)}>

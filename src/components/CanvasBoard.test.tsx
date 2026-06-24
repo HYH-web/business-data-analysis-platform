@@ -61,7 +61,7 @@ describe("CanvasBoard", () => {
 
     card.focus();
 
-    expect(onSelectChart).toHaveBeenCalledWith("funnel");
+    expect(onSelectChart).toHaveBeenCalledWith("funnel", "focus");
     expect(screen.getAllByRole("button", { name: "切换图表类型" })).toHaveLength(4);
     expect(screen.getAllByRole("button", { name: "查看原始数据" })).toHaveLength(4);
 

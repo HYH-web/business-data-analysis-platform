@@ -1,6 +1,6 @@
 import type { CanvasBlock, ChartKind, CleaningChoice, DataHealthSummary } from "../types/domain";
 import AlertCard from "./blocks/AlertCard";
-import ChartCard from "./blocks/ChartCard";
+import ChartCard, { type ChartSelectSource } from "./blocks/ChartCard";
 import DataHealthCard from "./blocks/DataHealthCard";
 import InsightBlock from "./blocks/InsightBlock";
 import SlashCommand from "./SlashCommand";
@@ -10,7 +10,7 @@ interface CanvasBoardProps {
   healthSummary: DataHealthSummary;
   cleaningSelected: boolean;
   onCleaningChoice: (choice: CleaningChoice) => void;
-  onSelectChart: (kind: ChartKind) => void;
+  onSelectChart: (kind: ChartKind, source?: ChartSelectSource) => void;
   onDeleteChart: (id: string) => void;
 }
 
