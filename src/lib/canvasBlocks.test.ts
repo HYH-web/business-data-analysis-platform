@@ -15,9 +15,12 @@ describe("canvasBlocks", () => {
   it("marks a chart as deleted without removing unrelated blocks", () => {
     const blocks = createInitialBlocks();
     const chart = blocks.find((block) => block.chartKind === "funnel");
+    const healthBlock = blocks[0];
     const updated = markChartDeleted(blocks, chart!.id);
     expect(updated.find((block) => block.id === chart!.id)?.body).toContain("已删除");
     expect(updated).toHaveLength(blocks.length);
+    expect(chart?.chartKind).toBe("funnel");
+    expect(updated[0]).toBe(healthBlock);
   });
 
   it("appends a follow-up insight block after AI response", () => {

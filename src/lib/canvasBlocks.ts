@@ -14,7 +14,7 @@ export function createInitialBlocks(): CanvasBlock[] {
 
 export function markChartDeleted(blocks: CanvasBlock[], id: string): CanvasBlock[] {
   return blocks.map((block) =>
-    block.id === id
+    block.id === id && block.type === "chart"
       ? { ...block, body: "该图表已删除，可通过撤销恢复。", chartKind: undefined }
       : block,
   );
