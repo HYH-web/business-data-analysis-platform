@@ -1,5 +1,5 @@
 import { CheckCircle2, Download, FileText, Files, Table2, X, type LucideIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { reportSections } from "../data/mockInsights";
 
 interface ReportPreviewProps {
@@ -41,20 +41,45 @@ const exportActions: ExportAction[] = [
 
 export default function ReportPreview({ open, onClose }: ReportPreviewProps) {
   const [mockStatus, setMockStatus] = useState(initialMockStatus);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    setMockStatus(initialMockStatus);
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, open]);
 
   if (!open) {
     return null;
   }
 
   return (
-    <section className="report-panel" aria-label="复盘报告预览">
+    <section className="report-panel" aria-label="复盘报告预览" role="dialog" aria-modal="true">
       <div className="report-panel-header">
         <div className="report-title-group">
           <p className="report-kicker">Replay report</p>
           <h2>复盘报告预览</h2>
           <p>清洗决策、异常归因和行动建议已沉淀成第一版复盘骨架。</p>
         </div>
-        <button type="button" className="report-close-button" onClick={onClose}>
+        <button type="button" className="report-close-button" onClick={onClose} ref={closeButtonRef}>
           <X size={16} aria-hidden="true" />
           <span>关闭</span>
         </button>

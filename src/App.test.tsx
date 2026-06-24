@@ -34,8 +34,24 @@ describe("App", () => {
   it("opens report preview and shows mock export actions", async () => {
     render(<App />);
     await userEvent.click(screen.getByRole("button", { name: "沉淀报告" }));
-    expect(screen.getByText("复盘报告预览")).toBeInTheDocument();
+    expect(screen.getByRole("dialog", { name: "复盘报告预览" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "导出 PDF" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "生成飞书文档" })).toBeInTheDocument();
+  });
+
+  it("resets mock export status when the report preview reopens", async () => {
+    render(<App />);
+
+    await userEvent.click(screen.getByRole("button", { name: "沉淀报告" }));
+    expect(screen.getByRole("button", { name: "关闭" })).toHaveFocus();
+
+    await userEvent.click(screen.getByRole("button", { name: "导出 PDF" }));
+    expect(screen.getByText(/导出 PDF 已模拟成功/)).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "关闭" }));
+    await userEvent.click(screen.getByRole("button", { name: "沉淀报告" }));
+
+    expect(screen.queryByText(/导出 PDF 已模拟成功/)).not.toBeInTheDocument();
+    expect(screen.getByText(/当前为 Mock Export/)).toBeInTheDocument();
   });
 });
