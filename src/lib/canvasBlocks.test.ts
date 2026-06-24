@@ -4,7 +4,11 @@ import { appendFollowUpBlock, createInitialBlocks, markChartDeleted } from "./ca
 describe("canvasBlocks", () => {
   it("starts with health, alert, and four chart blocks", () => {
     const blocks = createInitialBlocks();
-    expect(blocks.map((block) => block.type)).toContain("health");
+    expect(blocks[0]).toMatchObject({
+      id: "health-card",
+      type: "health",
+      title: "数据体检",
+    });
     expect(blocks.filter((block) => block.type === "chart")).toHaveLength(4);
   });
 
