@@ -135,7 +135,7 @@ button:not(:disabled) {
 
 .canvas-board {
   flex: 1;
-  padding: 1rem 1.25rem 1.5rem;
+  padding: 1rem 1.25rem 7rem;
   background:
     linear-gradient(rgba(47, 107, 255, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(47, 107, 255, 0.05) 1px, transparent 1px),

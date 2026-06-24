@@ -18,5 +18,16 @@ describe("App", () => {
     await userEvent.click(screen.getByRole("region", { name: "转化漏斗 转化漏斗" }));
     await userEvent.click(screen.getByRole("button", { name: "发送追问" }));
     expect(screen.getByText("AI BP 追问结论")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "发送追问" })).not.toBeInTheDocument();
+  });
+
+  it("keeps the AI bubble when deleting an unselected chart", async () => {
+    render(<App />);
+
+    await userEvent.click(screen.getByRole("button", { name: "选择方案 A" }));
+    await userEvent.click(screen.getByRole("region", { name: "转化漏斗 转化漏斗" }));
+    await userEvent.click(screen.getAllByRole("button", { name: "删除该图表" })[1]);
+
+    expect(screen.getByRole("button", { name: "发送追问" })).toBeInTheDocument();
   });
 });
