@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>业务数据智能分析平台海报</title>
+    <style>
+      :root {
+        --bg: #050814;
+        --ink: #eaf8ff;
+        --muted: #91a8bd;
+        --cyan: #51d6ff;
+        --blue: #2f6bff;
+        --orange: #ff9b54;
+        --amber: #ffd08a;
+        --green: #43e7b3;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #111;
+        font-family:
+          "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+      }
+
+      .poster {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 50% 50%, rgba(81, 214, 255, 0.22), transparent 24%),
+          radial-gradient(circle at 74% 47%, rgba(255, 139, 74, 0.22), transparent 27%),
+          linear-gradient(90deg, rgba(81, 214, 255, 0.13), transparent 42%, rgba(255, 155, 84, 0.15)),
+          var(--bg);
+      }
+
+      .poster::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(rgba(81, 214, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(81, 214, 255, 0.045) 1px, transparent 1px),
+          repeating-linear-gradient(
+            0deg,
+            transparent 0 14px,
+            rgba(255, 255, 255, 0.02) 15px 16px
+          );
+        background-size:
+          42px 42px,
+          42px 42px,
+          100% 16px;
+        opacity: 0.82;
+      }
+
+      .poster::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.08), transparent 9%, transparent 88%, rgba(0, 0, 0, 0.45)),
+          radial-gradient(circle at center, transparent 54%, rgba(0, 0, 0, 0.55));
+      }
+
+      .circuit {
+        position: absolute;
+        border: 2px solid rgba(81, 214, 255, 0.32);
+        filter: drop-shadow(0 0 12px rgba(81, 214, 255, 0.55));
+        opacity: 0.7;
+      }
+
+      .circuit.orange {
+        border-color: rgba(255, 155, 84, 0.35);
+        filter: drop-shadow(0 0 12px rgba(255, 155, 84, 0.52));
+      }
+
+      .circuit.one {
+        top: 38px;
+        left: 30px;
+        right: 30px;
+        height: 150px;
+        clip-path: polygon(5% 0, 95% 0, 100% 32%, 96% 100%, 4% 100%, 0 36%);
+      }
+
+      .circuit.two {
+        left: -52px;
+        top: 405px;
+        width: 350px;
+        height: 1180px;
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 12% 100%, 0 95%, 0 6%);
+      }
+
+      .circuit.three {
+        right: -52px;
+        top: 405px;
+        width: 350px;
+        height: 1180px;
+        clip-path: polygon(0 0, 90% 0, 100% 6%, 100% 95%, 88% 100%, 0 100%);
+      }
+
+      .top {
+        position: relative;
+        z-index: 2;
+        padding: 58px 70px 0;
+        text-align: center;
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 42px;
+        padding: 0 24px;
+        border: 1px solid rgba(81, 214, 255, 0.5);
+        color: var(--cyan);
+        background: rgba(8, 22, 46, 0.72);
+        box-shadow: 0 0 28px rgba(81, 214, 255, 0.2) inset;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+
+      h1 {
+        margin: 24px 0 8px;
+        color: #ecfbff;
+        font-size: 74px;
+        line-height: 1.05;
+        letter-spacing: 2px;
+        text-shadow:
+          0 0 16px rgba(81, 214, 255, 0.78),
+          0 0 42px rgba(47, 107, 255, 0.55);
+      }
+
+      .subtitle {
+        margin: 0;
+        color: #beeaff;
+        font-size: 31px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .main-grid {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 294px 1fr 294px;
+        gap: 26px;
+        padding: 54px 42px 0;
+      }
+
+      .panel {
+        position: relative;
+        border: 2px solid rgba(81, 214, 255, 0.7);
+        background:
+          linear-gradient(135deg, rgba(81, 214, 255, 0.16), transparent 32%),
+          rgba(3, 13, 28, 0.78);
+        box-shadow:
+          0 0 28px rgba(81, 214, 255, 0.28),
+          inset 0 0 22px rgba(81, 214, 255, 0.12);
+        clip-path: polygon(8% 0, 92% 0, 100% 14%, 100% 86%, 92% 100%, 8% 100%, 0 86%, 0 14%);
+      }
+
+      .panel.orange {
+        border-color: rgba(255, 155, 84, 0.76);
+        background:
+          linear-gradient(135deg, rgba(255, 155, 84, 0.17), transparent 32%),
+          rgba(28, 11, 5, 0.8);
+        box-shadow:
+          0 0 30px rgba(255, 155, 84, 0.28),
+          inset 0 0 22px rgba(255, 155, 84, 0.13);
+      }
+
+      .mini-panel {
+        padding: 22px 22px 24px;
+      }
+
+      .mini-panel h2,
+      .section-title {
+        margin: 0 0 14px;
+        color: var(--cyan);
+        font-size: 29px;
+        line-height: 1.2;
+        text-shadow: 0 0 14px rgba(81, 214, 255, 0.55);
+      }
+
+      .orange h2,
+      .orange .section-title {
+        color: var(--amber);
+        text-shadow: 0 0 14px rgba(255, 155, 84, 0.55);
+      }
+
+      .mini-panel p {
+        margin: 0;
+        color: #d5e9f4;
+        font-size: 22px;
+        line-height: 1.52;
+      }
+
+      .flow {
+        margin-top: 28px;
+        padding: 22px 18px 24px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 54px 1fr;
+        gap: 14px;
+        align-items: center;
+        min-height: 132px;
+        margin-top: 15px;
+        padding: 15px 14px;
+        border: 1px solid rgba(81, 214, 255, 0.52);
+        background: rgba(5, 20, 42, 0.82);
+        clip-path: polygon(8% 0, 100% 0, 100% 78%, 92% 100%, 0 100%, 0 20%);
+      }
+
+      .step-index {
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        border: 2px solid var(--cyan);
+        border-radius: 50%;
+        color: var(--cyan);
+        font-size: 24px;
+        font-weight: 800;
+        box-shadow: 0 0 16px rgba(81, 214, 255, 0.5);
+      }
+
+      .step strong {
+        display: block;
+        color: #f2fbff;
+        font-size: 24px;
+        line-height: 1.25;
+      }
+
+      .step span {
+        display: block;
+        margin-top: 6px;
+        color: #afcce0;
+        font-size: 18px;
+        line-height: 1.4;
+      }
+
+      .feature-list {
+        margin-top: 28px;
+        padding: 22px 18px 24px;
+      }
+
+      .feature {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 14px;
+        align-items: center;
+        min-height: 108px;
+        margin-top: 15px;
+        padding: 14px;
+        border: 1px solid rgba(81, 214, 255, 0.5);
+        background: rgba(5, 20, 42, 0.82);
+      }
+
+      .feature-icon {
+        color: var(--cyan);
+        font-size: 34px;
+        text-align: center;
+        filter: drop-shadow(0 0 10px rgba(81, 214, 255, 0.65));
+      }
+
+      .feature strong {
+        display: block;
+        color: var(--amber);
+        font-size: 21px;
+      }
+
+      .feature span {
+        display: block;
+        margin-top: 5px;
+        color: #b7cfdf;
+        font-size: 17px;
+        line-height: 1.38;
+      }
+
+      .center-stage {
+        position: relative;
+        min-height: 1200px;
+      }
+
+      .portal {
+        position: absolute;
+        inset: 22px 26px 0;
+        overflow: hidden;
+        border-left: 1px solid rgba(81, 214, 255, 0.35);
+        border-right: 1px solid rgba(255, 155, 84, 0.35);
+      }
+
+      .portal::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 30px;
+        width: 86px;
+        height: 1000px;
+        transform: translateX(-50%);
+        background:
+          radial-gradient(circle, white 0 8%, rgba(81, 214, 255, 0.82) 18%, transparent 34%),
+          linear-gradient(to bottom, transparent, white 18%, rgba(81, 214, 255, 0.9) 34%, white 52%, rgba(255, 155, 84, 0.92) 72%, transparent);
+        filter: blur(2px) drop-shadow(0 0 28px rgba(81, 214, 255, 0.8))
+          drop-shadow(0 0 34px rgba(255, 155, 84, 0.48));
+        clip-path: polygon(44% 0, 70% 12%, 46% 25%, 75% 39%, 42% 54%, 66% 69%, 38% 84%, 56% 100%, 26% 100%, 44% 84%, 18% 68%, 49% 54%, 22% 38%, 52% 24%, 28% 12%);
+      }
+
+      .portal::after {
+        content: "";
+        position: absolute;
+        inset: 130px 20px 70px;
+        background:
+          linear-gradient(90deg, rgba(81, 214, 255, 0.18), transparent 48%, rgba(255, 155, 84, 0.17)),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 18px);
+        opacity: 0.55;
+        mask-image: radial-gradient(ellipse at center, black 0 55%, transparent 72%);
+      }
+
+      .data-core {
+        position: absolute;
+        left: 50%;
+        top: 378px;
+        width: 280px;
+        height: 280px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        border: 2px solid rgba(230, 250, 255, 0.78);
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(81, 214, 255, 0.72) 10%, rgba(47, 107, 255, 0.24) 37%, rgba(0, 0, 0, 0.2) 62%),
+          conic-gradient(from 120deg, rgba(81, 214, 255, 0.9), rgba(255, 155, 84, 0.8), rgba(67, 231, 179, 0.75), rgba(81, 214, 255, 0.9));
+        box-shadow:
+          0 0 34px rgba(81, 214, 255, 0.76),
+          0 0 90px rgba(255, 155, 84, 0.42),
+          inset 0 0 48px rgba(255, 255, 255, 0.2);
+      }
+
+      .data-core .ring {
+        position: absolute;
+        inset: 28px;
+        border: 1px dashed rgba(255, 255, 255, 0.68);
+        border-radius: 50%;
+      }
+
+      .data-core .ring:nth-child(2) {
+        inset: 66px;
+        border-style: solid;
+        opacity: 0.9;
+      }
+
+      .data-core strong {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #04101d;
+        font-size: 54px;
+        letter-spacing: 2px;
+      }
+
+      .dashboard {
+        position: absolute;
+        left: 50%;
+        top: 710px;
+        width: 360px;
+        transform: translateX(-50%);
+        padding: 22px;
+        border: 1px solid rgba(234, 248, 255, 0.42);
+        background: rgba(2, 8, 18, 0.62);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+      }
+
+      .dash-row {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-top: 14px;
+        color: #dff7ff;
+        font-size: 18px;
+      }
+
+      .bar {
+        height: 12px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--cyan), var(--green), var(--orange));
+        box-shadow: 0 0 12px rgba(81, 214, 255, 0.45);
+      }
+
+      .bar.short {
+        width: 72%;
+      }
+
+      .bar.mid {
+        width: 86%;
+      }
+
+      .bar.long {
+        width: 96%;
+      }
+
+      .metrics {
+        position: absolute;
+        left: 50%;
+        top: 1048px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        width: 398px;
+        transform: translateX(-50%);
+      }
+
+      .metric {
+        min-height: 104px;
+        padding: 14px 10px;
+        border: 1px solid rgba(81, 214, 255, 0.44);
+        background: rgba(4, 17, 37, 0.74);
+        text-align: center;
+      }
+
+      .metric strong {
+        display: block;
+        color: #fff;
+        font-size: 30px;
+        line-height: 1.1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .demo-stack {
+        margin-top: 28px;
+        padding: 22px 18px 24px;
+      }
+
+      .scenario {
+        margin-top: 16px;
+        padding: 15px;
+        border: 1px solid rgba(255, 155, 84, 0.58);
+        background: rgba(38, 15, 4, 0.76);
+      }
+
+      .scenario strong {
+        color: var(--amber);
+        font-size: 23px;
+      }
+
+      .scenario p {
+        margin: 9px 0 0;
+        color: #f1d6bd;
+        font-size: 18px;
+        line-height: 1.46;
+      }
+
+      .qr-card {
+        margin-top: 28px;
+        padding: 22px 18px 24px;
+      }
+
+      .real-qr {
+        width: 206px;
+        height: 206px;
+        margin: 18px auto 14px;
+        padding: 12px;
+        background: #fff;
+        border: 5px solid rgba(255, 208, 138, 0.88);
+        box-shadow:
+          0 0 18px rgba(255, 155, 84, 0.42),
+          inset 0 0 0 1px rgba(5, 8, 20, 0.16);
+      }
+
+      .real-qr img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .qr-card p {
+        margin: 0;
+        color: #f3d7be;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.45;
+      }
+
+      .bottom {
+        position: absolute;
+        left: 42px;
+        right: 42px;
+        bottom: 48px;
+        z-index: 3;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .tagline {
+        min-height: 108px;
+        padding: 23px 28px;
+        border: 2px solid rgba(81, 214, 255, 0.55);
+        background: rgba(4, 15, 35, 0.86);
+        box-shadow: 0 0 28px rgba(81, 214, 255, 0.25);
+        clip-path: polygon(4% 0, 100% 0, 100% 72%, 94% 100%, 0 100%, 0 28%);
+      }
+
+      .tagline strong {
+        display: block;
+        color: var(--cyan);
+        font-size: 30px;
+        letter-spacing: 1px;
+      }
+
+      .tagline span {
+        display: block;
+        margin-top: 8px;
+        color: #d7e9f4;
+        font-size: 21px;
+      }
+
+      .brand-lockup {
+        min-width: 280px;
+        min-height: 108px;
+        padding: 22px 24px;
+        border: 2px solid rgba(255, 155, 84, 0.62);
+        background: rgba(35, 13, 3, 0.82);
+        color: var(--amber);
+        font-size: 28px;
+        font-weight: 800;
+        text-align: center;
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 28px rgba(255, 155, 84, 0.28);
+        clip-path: polygon(10% 0, 100% 0, 100% 72%, 88% 100%, 0 100%, 0 26%);
+      }
+
+      .spark {
+        position: absolute;
+        z-index: 1;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0 12px var(--cyan),
+          0 0 24px var(--cyan);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="poster" aria-label="业务数据智能分析平台海报">
+      <div class="circuit one"></div>
+      <div class="circuit two"></div>
+      <div class="circuit three orange"></div>
+      <span class="spark" style="left: 104px; top: 254px"></span>
+      <span class="spark" style="left: 514px; top: 294px"></span>
+      <span class="spark" style="left: 950px; top: 348px"></span>
+      <span class="spark" style="left: 182px; top: 1712px"></span>
+      <span class="spark" style="left: 890px; top: 1644px"></span>
+
+      <header class="top">
+        <div class="label">AI BUSINESS DATA ANALYSIS</div>
+        <h1>业务数据智能分析平台</h1>
+        <p class="subtitle">一句话定义：从脏数据到可汇报结论的自动化分析驾驶舱</p>
+      </header>
+
+      <section class="main-grid">
+        <aside>
+          <section class="panel mini-panel">
+            <h2>输入需求</h2>
+            <p>上传直播经营数据，选择清洗方案，系统自动识别异常窗口与关键指标。</p>
+          </section>
+
+          <section class="panel flow">
+            <h2 class="section-title">分析流程</h2>
+            <div class="step">
+              <div class="step-index">1</div>
+              <div>
+                <strong>数据接入</strong>
+                <span>导入 GMV、PCU、转化率、退款率等多维指标</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-index">2</div>
+              <div>
+                <strong>智能清洗</strong>
+                <span>空值处理、异常识别、指标口径统一</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-index">3</div>
+              <div>
+                <strong>图表生成</strong>
+                <span>漏斗、趋势、同期群、帕累托自动成图</span>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-index">4</div>
+              <div>
+                <strong>报告沉淀</strong>
+                <span>输出可复盘、可汇报、可迭代的 BP 草稿</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel feature-list">
+            <h2 class="section-title">核心能力</h2>
+            <div class="feature">
+              <div class="feature-icon">▣</div>
+              <div>
+                <strong>数据体检</strong>
+                <span>自动发现空值、异常峰谷与风险区间</span>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">⌁</div>
+              <div>
+                <strong>AI 追问</strong>
+                <span>针对图表结论继续挖掘业务原因</span>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="center-stage" aria-label="数据中枢视觉">
+          <div class="portal"></div>
+          <div class="data-core">
+            <span class="ring"></span>
+            <span class="ring"></span>
+            <strong>DATA</strong>
+          </div>
+          <div class="dashboard">
+            <div class="dash-row">
+              <span>转化效率</span>
+              <div class="bar long"></div>
+            </div>
+            <div class="dash-row">
+              <span>异常告警</span>
+              <div class="bar mid"></div>
+            </div>
+            <div class="dash-row">
+              <span>报告完整度</span>
+              <div class="bar short"></div>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <strong>30</strong>
+              <span>样本行</span>
+            </div>
+            <div class="metric">
+              <strong>13</strong>
+              <span>字段列</span>
+            </div>
+            <div class="metric">
+              <strong>4</strong>
+              <span>图表块</span>
+            </div>
+          </div>
+        </section>
+
+        <aside>
+          <section class="panel orange mini-panel">
+            <h2>输出结论</h2>
+            <p>把数据异常、图表洞察和经营动作沉淀为结构化复盘报告。</p>
+          </section>
+
+          <section class="panel orange demo-stack">
+            <h2 class="section-title">现场演示</h2>
+            <div class="scenario">
+              <strong>场景 A：快速复盘</strong>
+              <p>一键清洗数据，定位 21:00-21:30 异常窗口。</p>
+            </div>
+            <div class="scenario">
+              <strong>场景 B：图表分析</strong>
+              <p>生成转化漏斗、双轴趋势、同期群热力图。</p>
+            </div>
+            <div class="scenario">
+              <strong>场景 C：AI 追问</strong>
+              <p>围绕图表结论继续追问，补充业务解释。</p>
+            </div>
+            <div class="scenario">
+              <strong>场景 D：报告导出</strong>
+              <p>沉淀报告预览，模拟 PDF 与飞书文档导出。</p>
+            </div>
+          </section>
+
+          <section class="panel orange qr-card">
+            <h2 class="section-title">体验入口</h2>
+            <div class="real-qr" aria-label="体验入口二维码">
+              <img src="./business-data-intelligence-qr.png" alt="访问演示地址二维码" />
+            </div>
+            <p>演示地址<br />http://127.0.0.1:5173/</p>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="bottom">
+        <div class="tagline">
+          <strong>让分析像搭积木一样沉淀</strong>
+          <span>清洗、洞察、追问、图表、报告，在同一个智能画布中完成。</span>
+        </div>
+        <div class="brand-lockup">智能体：数据分析官</div>
+      </footer>
+    </main>
+  </body>
+</html>

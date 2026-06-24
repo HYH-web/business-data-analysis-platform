@@ -3,6 +3,11 @@ dist/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+submission/
+submission.zip
+*.zip
+*_提交包.zip
+Web-bda-prompt.docx
 .agents/
 .codex/
 .superpowers/
