@@ -15,4 +15,11 @@ describe("dataHealth", () => {
     expect(result.label).toBe("方案 A");
     expect(result.copy).toContain("保全大盘口径");
   });
+
+  it("returns business copy for the row-dropping cleaning choice", () => {
+    const result = applyCleaningChoice("drop-rows");
+    expect(result.choice).toBe("drop-rows");
+    expect(result.label).toBe("方案 B");
+    expect(result.copy).toContain("大盘完整性");
+  });
 });

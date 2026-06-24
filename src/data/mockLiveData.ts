@@ -33,8 +33,17 @@ const slots = [
   "22:25",
 ];
 
+const anomalyTimeSlots = new Set(["21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30"]);
+const missingAovIndices = new Set([4, 13, 21]);
+
+function getListedPrice(index: number) {
+  return index % 3 === 0 ? 268 : 239;
+}
+
 export const mockLiveRows: LiveMetricRow[] = slots.map((timeSlot, index) => {
-  const inAnomaly = index >= 12 && index <= 18;
+  const inAnomaly = anomalyTimeSlots.has(timeSlot);
+  const listedPrice = getListedPrice(index);
+  const aov = missingAovIndices.has(index) ? null : listedPrice;
   const pcu = 8200 + index * 145 + (inAnomaly ? -1800 : 0);
   const exposure = 54000 + index * 900;
   const enterRoom = Math.round(exposure * (inAnomaly ? 0.18 : 0.26));
@@ -45,14 +54,14 @@ export const mockLiveRows: LiveMetricRow[] = slots.map((timeSlot, index) => {
   return {
     timeSlot,
     pcu,
-    gmv: payment * (index % 3 === 0 ? 268 : 239),
+    gmv: payment * listedPrice,
     exposure,
     enterRoom,
     productClick,
     orderSubmit,
     payment,
     refundRate: inAnomaly ? 0.182 + index * 0.001 : 0.062 + index * 0.0006,
-    aov: [4, 13, 21].includes(index) ? null : index % 3 === 0 ? 268 : 239,
+    aov,
     productName: ["羽绒服套装", "高腰牛仔裤", "针织连衣裙", "通勤西装"][index % 4],
     userSegment: ["新客", "高复购老客", "价格敏感人群", "直播间高互动用户"][index % 4],
     repurchaseCohort: ["首购", "7日复购", "14日复购", "30日复购"][index % 4],
