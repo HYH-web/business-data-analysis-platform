@@ -69,4 +69,31 @@ describe("CanvasBoard", () => {
 
     expect(onDeleteChart).toHaveBeenCalledWith("chart-funnel");
   });
+
+  it("does not select a chart when the delete action receives focus", async () => {
+    const user = userEvent.setup();
+    const onSelectChart = vi.fn();
+    const onDeleteChart = vi.fn();
+
+    render(
+      <CanvasBoard
+        blocks={createInitialBlocks()}
+        healthSummary={buildDataHealthSummary(mockLiveRows)}
+        cleaningSelected={false}
+        onCleaningChoice={vi.fn()}
+        onSelectChart={onSelectChart}
+        onDeleteChart={onDeleteChart}
+      />,
+    );
+
+    const deleteButton = screen.getAllByRole("button", { name: "删除该图表" })[0];
+
+    deleteButton.focus();
+    expect(onSelectChart).not.toHaveBeenCalled();
+
+    await user.click(deleteButton);
+
+    expect(onDeleteChart).toHaveBeenCalledWith("chart-funnel");
+    expect(onSelectChart).not.toHaveBeenCalled();
+  });
 });

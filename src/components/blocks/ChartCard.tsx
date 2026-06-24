@@ -1,3 +1,4 @@
+import type { FocusEvent, MouseEvent } from "react";
 import ReactECharts from "echarts-for-react";
 import { BarChart3, Table2, Trash2 } from "lucide-react";
 import { buildChartOption } from "../../charts/chartOptions";
@@ -28,14 +29,26 @@ const chartConclusions: Record<ChartKind, string> = {
 
 export default function ChartCard({ id, title, kind, onSelect, onDelete }: ChartCardProps) {
   const handleSelect = () => onSelect(kind);
+  const handleCardFocus = (event: FocusEvent<HTMLElement>) => {
+    if (event.currentTarget === event.target) {
+      handleSelect();
+    }
+  };
+  const handleCardMouseEnter = (event: MouseEvent<HTMLElement>) => {
+    if (event.target instanceof Element && event.target.closest(".chart-actions")) {
+      return;
+    }
+
+    handleSelect();
+  };
 
   return (
     <section
       className="block-card chart-card"
       aria-label={`${title} ${chartLabels[kind]}`}
       tabIndex={0}
-      onFocus={handleSelect}
-      onMouseEnter={handleSelect}
+      onFocus={handleCardFocus}
+      onMouseEnter={handleCardMouseEnter}
     >
       <div className="chart-card-header">
         <div>
