@@ -1,4 +1,4 @@
-import type { CanvasBlock, ChartKind, CleaningChoice, DataHealthSummary } from "../types/domain";
+import type { CanvasBlock, ChartKind, CleaningChoice, DataHealthSummary, LiveMetricRow } from "../types/domain";
 import AlertCard from "./blocks/AlertCard";
 import ChartCard, { type ChartSelectSource } from "./blocks/ChartCard";
 import DataHealthCard from "./blocks/DataHealthCard";
@@ -7,8 +7,11 @@ import SlashCommand from "./SlashCommand";
 
 interface CanvasBoardProps {
   blocks: CanvasBlock[];
+  rows: LiveMetricRow[];
   healthSummary: DataHealthSummary;
   cleaningSelected: boolean;
+  sourceName: string;
+  mappedColumns: string[];
   onCleaningChoice: (choice: CleaningChoice) => void;
   onSelectChart: (kind: ChartKind, source?: ChartSelectSource) => void;
   onDeleteChart: (id: string) => void;
@@ -16,8 +19,11 @@ interface CanvasBoardProps {
 
 export default function CanvasBoard({
   blocks,
+  rows,
   healthSummary,
   cleaningSelected,
+  sourceName,
+  mappedColumns,
   onCleaningChoice,
   onSelectChart,
   onDeleteChart,
@@ -28,9 +34,9 @@ export default function CanvasBoard({
         <h2>解析这场直播复盘的业务脉络</h2>
         <p>先清洗数据，再逐块拼接图表、告警和结论，最后沉淀成可复用的 BP 草稿。</p>
         <div className="canvas-chip-row">
-          <span className="canvas-chip">导入完成</span>
-          <span className="canvas-chip">数据校验通过</span>
-          <span className="canvas-chip">待生成图表</span>
+          <span className="canvas-chip">数据源：{sourceName}</span>
+          <span className="canvas-chip">{rows.length} 行数据</span>
+          <span className="canvas-chip">识别字段：{mappedColumns.slice(0, 4).join(" / ") || "内置演示字段"}</span>
         </div>
       </section>
 
@@ -60,6 +66,7 @@ export default function CanvasBoard({
                 id={block.id}
                 title={block.title}
                 kind={block.chartKind}
+                rows={rows}
                 onSelect={onSelectChart}
                 onDelete={onDeleteChart}
               />

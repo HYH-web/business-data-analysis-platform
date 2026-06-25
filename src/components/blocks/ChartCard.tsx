@@ -2,8 +2,7 @@ import type { FocusEvent, MouseEvent } from "react";
 import ReactECharts from "echarts-for-react";
 import { BarChart3, Table2, Trash2 } from "lucide-react";
 import { buildChartOption } from "../../charts/chartOptions";
-import { mockLiveRows } from "../../data/mockLiveData";
-import type { ChartKind } from "../../types/domain";
+import type { ChartKind, LiveMetricRow } from "../../types/domain";
 
 export type ChartSelectSource = "focus" | "action";
 
@@ -11,6 +10,7 @@ interface ChartCardProps {
   id: string;
   title: string;
   kind: ChartKind;
+  rows: LiveMetricRow[];
   onSelect: (kind: ChartKind, source?: ChartSelectSource) => void;
   onDelete: (id: string) => void;
 }
@@ -29,7 +29,7 @@ const chartConclusions: Record<ChartKind, string> = {
   pareto: "头部商品贡献集中，后续陈列应围绕高 GMV 款补充连带搭配。",
 };
 
-export default function ChartCard({ id, title, kind, onSelect, onDelete }: ChartCardProps) {
+export default function ChartCard({ id, title, kind, rows, onSelect, onDelete }: ChartCardProps) {
   const handleSelect = (source?: ChartSelectSource) => onSelect(kind, source);
   const handleCardFocus = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget === event.target) {
@@ -70,7 +70,7 @@ export default function ChartCard({ id, title, kind, onSelect, onDelete }: Chart
         </div>
       </div>
 
-      <ReactECharts option={buildChartOption(kind, mockLiveRows)} style={{ height: 260 }} />
+      <ReactECharts option={buildChartOption(kind, rows)} style={{ height: 260 }} />
 
       <p className="chart-conclusion">{chartConclusions[kind]}</p>
     </section>

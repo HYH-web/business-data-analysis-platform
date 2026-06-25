@@ -16,8 +16,11 @@ describe("CanvasBoard", () => {
     render(
       <CanvasBoard
         blocks={createInitialBlocks()}
+        rows={mockLiveRows}
         healthSummary={buildDataHealthSummary(mockLiveRows)}
         cleaningSelected={false}
+        sourceName="示例数据"
+        mappedColumns={["时间", "GMV", "PCU"]}
         onCleaningChoice={onCleaningChoice}
         onSelectChart={vi.fn()}
         onDeleteChart={vi.fn()}
@@ -45,8 +48,11 @@ describe("CanvasBoard", () => {
     render(
       <CanvasBoard
         blocks={createInitialBlocks()}
+        rows={mockLiveRows}
         healthSummary={buildDataHealthSummary(mockLiveRows)}
         cleaningSelected={false}
+        sourceName="示例数据"
+        mappedColumns={["时间", "GMV", "PCU"]}
         onCleaningChoice={vi.fn()}
         onSelectChart={onSelectChart}
         onDeleteChart={onDeleteChart}
@@ -78,8 +84,11 @@ describe("CanvasBoard", () => {
     render(
       <CanvasBoard
         blocks={createInitialBlocks()}
+        rows={mockLiveRows}
         healthSummary={buildDataHealthSummary(mockLiveRows)}
         cleaningSelected={false}
+        sourceName="示例数据"
+        mappedColumns={["时间", "GMV", "PCU"]}
         onCleaningChoice={vi.fn()}
         onSelectChart={onSelectChart}
         onDeleteChart={onDeleteChart}
